@@ -1,0 +1,11 @@
+body {
+  background-color: rgb(42, 35, 35);
+}
+.container {
+  margin: 20px auto;
+  /* background-color: aliceblue; */
+}
+/* .b-n-o:focus {
+  outline: none;
+  box-shadow: none;
+} */

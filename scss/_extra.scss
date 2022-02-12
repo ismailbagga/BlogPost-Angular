@@ -1,0 +1,4 @@
+@mixin colorsChanger($color) {
+  background-color: $color;
+  color: $color;
+}

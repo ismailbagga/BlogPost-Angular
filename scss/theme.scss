@@ -1,0 +1,21 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/utilities";
+$custom-theme: (
+  main: #ff443e,
+  projGrey: #616160,
+);
+$utilities: (
+  "color": (
+    property: color,
+    class: text,
+    local-vars: (
+      "text-opacity": 1,
+    ),
+    values: map-merge($utilities-text-colors, $custom-theme),
+  ),
+);
+$theme-colors: map-merge($custom-theme, $theme-colors);
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+// @include mat.core-theme($my-theme);
+// @include mat.button-theme($my-theme);

@@ -1,0 +1,7 @@
+img {
+  width: 100%;
+}
+.b-n-o:focus {
+  outline: none;
+  box-shadow: none;
+}
