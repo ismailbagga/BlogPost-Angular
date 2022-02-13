@@ -8,13 +8,21 @@ import { FormControl } from '@angular/forms';
 })
 export class FormFieldComponent implements OnInit {
   @Input() valid: boolean = false;
-  @Input() unvalid: boolean = false;
+  @Input() invalid: boolean = false;
   @Input() label = '';
   @Input() type = '';
   @Input() placeholder = '';
   @Input() control!: FormControl;
-  @Input() fieldName: string = '';
+  isFocus: boolean = true;
   constructor() {}
 
   ngOnInit(): void {}
+  unFocus() {
+    this.isFocus = false;
+    console.log('unfocus', this.isFocus);
+  }
+  focus() {
+    this.isFocus = true;
+    console.log('focus', this.isFocus);
+  }
 }

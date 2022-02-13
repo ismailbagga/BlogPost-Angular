@@ -1,39 +1,14 @@
 <form [formGroup]="formGroup">
   <div class="row">
-    <div class="col-12">
-      <app-form-field
-        [control]="getControler('papa')"
-        label="pap"
-        type="text"
-        fieldName="username"
-      >
-        <!-- <h1>Valid</h1> -->
-        <!-- <div
-          *ngIf="fetchError('papa', 'required')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Username already exist
-          <h1></h1>
-        </div> -->
-      </app-form-field>
-    </div>
+    <div class="col-12"></div>
     <div class="col-6 align-items-center">
-      <label class="form-label" for="username">Username</label>
-      <div class="input-group">
-        <div class="input-group-text">@</div>
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-valid': isValid('username'),
-            'is-invalid': isUnValid('username')
-          }"
-          formControlName="username"
-          id="username"
-          aria-describedby="validationServerUsernameFeedback"
-        />
-        <div class="valid-feedback">Looks good!</div>
+      <app-form-field
+        [control]="getControler('username')"
+        label="username"
+        type="text"
+        [valid]="isValid('username')"
+        [invalid]="isUnValid('username')"
+      >
         <div
           *ngIf="fetchError('username', 'required')"
           id="validationServerUsernameFeedback"
@@ -62,54 +37,42 @@
         >
           Username can not be more then 3 caracters
         </div>
-      </div>
+      </app-form-field>
     </div>
 
     <div class="col-6">
-      <label class="form-label">Full Name</label>
-      <input
+      <app-form-field
         type="text"
-        class="form-control"
-        id="fullName"
-        [ngClass]="{
-          'is-valid': isValid('fullName'),
-          'is-invalid': isUnValid('fullName')
-        }"
-        aria-describedby="validationServerFullNameFeedback"
-        formControlName="fullName"
-      />
-      <div class="valid-feedback">Looks good!</div>
-      <div
-        *ngIf="fetchError('fullName', 'maxlength')"
-        id="validationServerUsernameFeedback"
-        class="invalid-feedback"
+        label="Full Name"
+        [valid]="isValid('fullName')"
+        [invalid]="isUnValid('fullName')"
+        [control]="getControler('fullName')"
       >
-        fullName can not be more then 20 caracters
-      </div>
-      <div
-        *ngIf="fetchError('fullName', 'required')"
-        id="validationServerUsernameFeedback"
-        class="invalid-feedback"
-      >
-        fullName is required
-      </div>
+        <div
+          *ngIf="fetchError('fullName', 'maxlength')"
+          class="invalid-feedback"
+        >
+          Full name can not be more then 20 caracters
+        </div>
+        <div
+          *ngIf="fetchError('fullName', 'required')"
+          class="invalid-feedback"
+        >
+          fullName is required
+        </div>
+      </app-form-field>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col-12">
-      <label class="form-label">Email</label>
-      <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          [ngClass]="{
-            'is-valid': isValid('email'),
-            'is-invalid': isUnValid('email')
-          }"
-          formControlName="email"
-        />
-        <div class="input-group-text">@gmail.com</div>
-        <div class="valid-feedback">Valid</div>
+      <app-form-field
+        type="email"
+        label="Email"
+        [valid]="isValid('email')"
+        [invalid]="isUnValid('email')"
+        [control]="getControler('email')"
+        placeholder="example@gmail.com"
+      >
         <div
           *ngIf="fetchError('email', 'emailUsed')"
           id="validationServerUsernameFeedback"
@@ -131,47 +94,43 @@
         >
           Enter a Valid Email
         </div>
-      </div>
+      </app-form-field>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
-      <label class="form-label">Password</label>
-      <input
+      <app-form-field
         type="password"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': isValid('password'),
-          'is-invalid': isUnValid('password')
-        }"
-        formControlName="password"
-      />
-      <div
-        *ngIf="fetchError('password', 'required')"
-        id="validationServerUsernameFeedback"
-        class="invalid-feedback"
+        label="Password"
+        [valid]="isValid('password')"
+        [invalid]="isUnValid('password')"
+        [control]="getControler('password')"
       >
-        Password Required
-      </div>
-      <div
-        *ngIf="fetchError('password', 'minlength')"
-        id="validationServerUsernameFeedback"
-        class="invalid-feedback"
+        <div
+          *ngIf="fetchError('password', 'required')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Password Required
+        </div>
+        <div
+          *ngIf="fetchError('password', 'minlength')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Password CAN NOT BE LESS THEN 5 CARACTERS
+        </div></app-form-field
       >
-        Password CAN NOT BE LESS THEN 5 CARACTERS
-      </div>
     </div>
     <div class="col">
-      <label class="form-label">Confirm Password</label>
-      <input
+      <app-form-field
         type="password"
-        class="form-control"
-        [ngClass]="{
-          'is-valid': isValid('confirm'),
-          'is-invalid': isUnValid('confirm')
-        }"
-        formControlName="confirm"
-      />
+        label="Password"
+        [valid]="isValid('confirm')"
+        [invalid]="isUnValid('confirm')"
+        [control]="getControler('confirm')"
+      >
+      </app-form-field>
     </div>
   </div>
   <div class="row mt-5 align-items-center">
@@ -188,7 +147,7 @@
   <p>papa : {{ formGroup.get("papa")?.value | json }}</p>
   <p>Form Status : {{ formGroup.status }}</p>
   <p>username : {{ formGroup.get("username")?.errors | json }}</p>
-  <p>full Name : {{ formGroup.get("fullName")?.valid | json }}</p>
+  <p>full Name : {{ formGroup.get("fullName")?.errors | json }}</p>
   <p>email : {{ formGroup.get("email")?.errors | json }}</p>
   <p>fullname : {{ formGroup.valid }}</p>
 </div>

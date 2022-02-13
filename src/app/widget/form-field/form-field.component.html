@@ -2,8 +2,14 @@
 <input
   [type]="type"
   class="form-control is-invalid"
-  id="fullName"
+  [ngClass]="{
+    'is-valid': valid && !isFocus,
+    'is-invalid': invalid && !isFocus
+  }"
+  [placeholder]="placeholder"
   [formControl]="control"
+  (blur)="unFocus()"
+  (focus)="focus()"
 />
 <div class="valid-feedback">Looks good!</div>
 

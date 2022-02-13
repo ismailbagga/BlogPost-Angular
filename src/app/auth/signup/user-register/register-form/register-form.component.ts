@@ -13,7 +13,6 @@ import {
 })
 export class RegisterFormComponent implements OnInit {
   formGroup = new FormGroup({
-    papa: new FormControl('', Validators.required),
     username: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
@@ -35,12 +34,14 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {}
   isValid(key: string): boolean {
     let control = this.getControler(key);
-    console.log(control.invalid && control.touched && control.dirty);
+    // console.log(control.invalid && control.touched && control.dirty);
+    // if (key === 'username') console.log('valid', control.untouched);
 
     return control.valid && control.touched && control.dirty;
   }
   isUnValid(key: string): boolean {
     let control = this.getControler(key);
+    // if (key === 'username') console.log('undvalid', control.untouched);
     return control.invalid && control.touched && control.dirty;
   }
   getControler(key: string): FormControl {
