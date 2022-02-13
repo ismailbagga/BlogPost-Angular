@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { UserRegisterComponent } from './signup/user-register/user-register.component';
 import { CodeVerifyingComponent } from './signup/code-verifying/code-verifying.component';
-import { CompletePageComponent } from './signup/user-register/complete-page/complete-page.component';
+import { CompletePageComponent } from './signup/complete-page/complete-page.component';
 import { WidgetModule } from '../widget/widget.module';
 
 @NgModule({
