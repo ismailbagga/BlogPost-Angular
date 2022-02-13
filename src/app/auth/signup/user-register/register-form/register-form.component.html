@@ -21,6 +21,13 @@
           id="validationServerUsernameFeedback"
           class="invalid-feedback"
         >
+          Username already exist
+        </div>
+        <div
+          *ngIf="fetchError('username', 'required')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
           Username Required
         </div>
         <div
@@ -54,8 +61,19 @@
         formControlName="fullName"
       />
       <div class="valid-feedback">Looks good!</div>
-      <div id="validationServerFullNameFeedback" class="invalid-feedback">
-        Please choose a username.
+      <div
+        *ngIf="fetchError('fullName', 'maxlength')"
+        id="validationServerUsernameFeedback"
+        class="invalid-feedback"
+      >
+        fullName can not be more then 20 caracters
+      </div>
+      <div
+        *ngIf="fetchError('fullName', 'required')"
+        id="validationServerUsernameFeedback"
+        class="invalid-feedback"
+      >
+        fullName is required
       </div>
     </div>
   </div>
@@ -73,6 +91,28 @@
           formControlName="email"
         />
         <div class="input-group-text">@gmail.com</div>
+        <div class="valid-feedback">Valid</div>
+        <div
+          *ngIf="fetchError('email', 'emailUsed')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          this email already Used
+        </div>
+        <div
+          *ngIf="fetchError('email', 'required')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          email is required
+        </div>
+        <div
+          *ngIf="fetchError('email', 'email')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Enter a Valid Email
+        </div>
       </div>
     </div>
   </div>
@@ -80,7 +120,7 @@
     <div class="col">
       <label class="form-label">Password</label>
       <input
-        type="text"
+        type="password"
         class="form-control"
         [ngClass]="{
           'is-valid': isValid('password'),
@@ -88,11 +128,25 @@
         }"
         formControlName="password"
       />
+      <div
+        *ngIf="fetchError('password', 'required')"
+        id="validationServerUsernameFeedback"
+        class="invalid-feedback"
+      >
+        Password Required
+      </div>
+      <div
+        *ngIf="fetchError('password', 'minlength')"
+        id="validationServerUsernameFeedback"
+        class="invalid-feedback"
+      >
+        Password CAN NOT BE LESS THEN 5 CARACTERS
+      </div>
     </div>
     <div class="col">
       <label class="form-label">Confirm Password</label>
       <input
-        type="text"
+        type="password"
         class="form-control"
         [ngClass]="{
           'is-valid': isValid('confirm'),
@@ -115,6 +169,6 @@
   <p>Form Status : {{ formGroup.status }}</p>
   <p>username : {{ formGroup.get("username")?.errors | json }}</p>
   <p>full Name : {{ formGroup.get("fullName")?.valid | json }}</p>
-  <p>email : {{ formGroup.valid }}</p>
+  <p>email : {{ formGroup.get("email")?.errors | json }}</p>
   <p>fullname : {{ formGroup.valid }}</p>
 </div>
