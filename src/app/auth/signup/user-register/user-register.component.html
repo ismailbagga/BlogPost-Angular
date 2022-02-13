@@ -6,33 +6,21 @@
     </div>
     <div class="col">
       <form [formGroup]="formGroup" class="need-validation" novalidate>
-        <div class="input-group has-validation">
-          <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input
-            type="text"
-            class="form-control is-invalid"
-            id="validationCustomUsername"
-            aria-describedby="inputGroupPrepend"
-            required
-          />
-          <div class="invalid-feedback">Please choose a username.</div>
-        </div>
         <div class="row">
-          <div class="col-6">
-            <app-form-field
+          <div class="col-6 align-items-center">
+            <app-form-field-with-icon
               label="username"
               type="text"
-              [addIcon]="true"
               [control]="formGroup"
               controllerName="username"
-            ></app-form-field>
+            >
+            </app-form-field-with-icon>
           </div>
 
           <div class="col-6">
             <app-form-field
               controllerName="fullName"
               type="text"
-              [addIcon]="true"
               label="Full Name"
               [control]="formGroup"
             ></app-form-field>
@@ -40,13 +28,12 @@
         </div>
         <div class="row mt-3">
           <div class="col-12">
-            <app-form-field
+            <app-form-field-with-icon
               controllerName="email"
               label="email"
               type="email"
-              [addIcon]="true"
               [control]="formGroup"
-            ></app-form-field>
+            ></app-form-field-with-icon>
           </div>
         </div>
         <div class="row mt-3">
@@ -56,7 +43,6 @@
               label="password"
               [control]="formGroup"
               controllerName="password"
-              [addIcon]="true"
             ></app-form-field>
           </div>
           <div class="col">
@@ -64,7 +50,6 @@
               controllerName="confirmPassword"
               label="confirm password"
               type="password"
-              [addIcon]="true"
               [control]="formGroup"
             ></app-form-field>
           </div>

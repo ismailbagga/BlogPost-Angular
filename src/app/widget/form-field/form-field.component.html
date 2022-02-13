@@ -1,18 +1,11 @@
-<!-- <form > -->
-<div  *ngIf="!addIcon" [formGroup]="group">
-  <label>{{ label }}</label>
-  <input [type]="type" class="form-control" [formControlName]="controllerName" [placeholder]="label" />
-</div>
-<div *ngIf="addIcon" [formGroup]="group">
+<div [formGroup]="group">
   <label class="form-label">{{ label }}</label>
-  <div class="input-group has-validation">
-    <div class="input-group-text" *ngIf="label == 'username'">@</div>
-    <input type="text" class="form-control form-control-md" [formControlName]="controllerName" (input)="write($event)"/>
-    <div class="input-group-text" *ngIf="label == 'email'">@gmail.com</div>
-      <div class="invalid-feedback" >
-        Please choose a username.
-      </div>
-  </div>
+  <input
+    [type]="type"
+    class="form-control"
+    [formControlName]="controllerName"
+    [placeholder]="label"
+  />
+  <div class="invalid-feedback">Please choose a username.</div>
+  <div class="valid-feedback">valid</div>
 </div>
-
-<!-- </form> -->

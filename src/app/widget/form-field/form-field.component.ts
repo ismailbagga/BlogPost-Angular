@@ -10,7 +10,6 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 export class FormFieldComponent implements OnInit {
   @Input() type = '';
   @Input() label = '';
-  @Input() addIcon = false;
   @Input('control') group!: FormGroup;
   @Input() controllerName: string = '';
   constructor() {}
@@ -18,13 +17,12 @@ export class FormFieldComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.control.parent);
   }
-  // or aplly this 
+  // or aplly this
   write(event: Event) {
     // console.log(event);
     let value = (event.target as HTMLInputElement).value;
     // this.control.setValue(value);
     // console.log(this.control);
     console.log(this.group);
-    
   }
 }

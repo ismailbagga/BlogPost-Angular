@@ -1,0 +1,14 @@
+<div [formGroup]="group">
+  <label class="form-label">{{ label }}</label>
+  <div class="input-group">
+    <div class="input-group-text" *ngIf="label == 'username'">@</div>
+    <input
+      type="text"
+      class="form-control"
+      [formControlName]="controllerName"
+    />
+    <div class="input-group-text" *ngIf="label == 'email'">@gmail.com</div>
+    <div class="invalid-feedback">Please choose a username.</div>
+    <div class="valid-feedback">valid</div>
+  </div>
+</div>
