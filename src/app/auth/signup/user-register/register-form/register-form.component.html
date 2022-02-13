@@ -1,35 +1,105 @@
-<form [formGroup]="formGroup" class="need-validation" novalidate>
+<form [formGroup]="formGroup">
   <div class="row">
     <div class="col-6 align-items-center">
-      <label class="form-label need-validation">Username</label>
+      <label class="form-label" for="username">Username</label>
       <div class="input-group">
         <div class="input-group-text">@</div>
-        <input type="text" class="form-control invalid" />
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': isValid('username'),
+            'is-invalid': isUnValid('username')
+          }"
+          formControlName="username"
+          id="username"
+          aria-describedby="validationServerUsernameFeedback"
+        />
+        <div class="valid-feedback">Looks good!</div>
+        <div
+          *ngIf="fetchError('username', 'required')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Username Required
+        </div>
+        <div
+          *ngIf="fetchError('username', 'minlength')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Username can not be less then 3 caracters
+        </div>
+        <div
+          *ngIf="fetchError('username', 'maxlength')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Username can not be more then 3 caracters
+        </div>
       </div>
     </div>
 
     <div class="col-6">
       <label class="form-label">Full Name</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        id="fullName"
+        [ngClass]="{
+          'is-valid': isValid('fullName'),
+          'is-invalid': isUnValid('fullName')
+        }"
+        aria-describedby="validationServerFullNameFeedback"
+        formControlName="fullName"
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <div id="validationServerFullNameFeedback" class="invalid-feedback">
+        Please choose a username.
+      </div>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col-12">
-      <label class="form-label need-validation">Email</label>
+      <label class="form-label">Email</label>
       <div class="input-group">
-        <input type="text" class="form-control invalid" />
-        <div class="input-group-text">@</div>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-valid': isValid('email'),
+            'is-invalid': isUnValid('email')
+          }"
+          formControlName="email"
+        />
+        <div class="input-group-text">@gmail.com</div>
       </div>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
       <label class="form-label">Password</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="{
+          'is-valid': isValid('password'),
+          'is-invalid': isUnValid('password')
+        }"
+        formControlName="password"
+      />
     </div>
     <div class="col">
       <label class="form-label">Confirm Password</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="{
+          'is-valid': isValid('confirm'),
+          'is-invalid': isUnValid('confirm')
+        }"
+        formControlName="confirm"
+      />
     </div>
   </div>
   <div class="row mt-5 align-items-center">
@@ -42,9 +112,9 @@
   </div>
 </form>
 <div class="container mt-3">
-  <h3>Valid : {{ formGroup.valid }}</h3>
-  <h3>username : {{ formGroup.controls | json }}</h3>
-  <h3>password : {{ formGroup.valid }}</h3>
-  <h3>email : {{ formGroup.valid }}</h3>
-  <h3>fullname : {{ formGroup.valid }}</h3>
+  <p>Form Status : {{ formGroup.status }}</p>
+  <p>username : {{ formGroup.get("username")?.errors | json }}</p>
+  <p>full Name : {{ formGroup.get("fullName")?.valid | json }}</p>
+  <p>email : {{ formGroup.valid }}</p>
+  <p>fullname : {{ formGroup.valid }}</p>
 </div>

@@ -5,9 +5,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 
 } */
 body {
-  background-color: rgb(0, 0, 0) !important;
+  background-color: rgb(216, 216, 216) !important;
 }
 .b-n-o:focus {
-  outline: none;
-  box-shadow: none;
+}
+.b-n-o:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
