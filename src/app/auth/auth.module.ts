@@ -8,6 +8,7 @@ import { UserRegisterComponent } from './signup/user-register/user-register.comp
 import { CodeVerifyingComponent } from './signup/code-verifying/code-verifying.component';
 import { CompletePageComponent } from './signup/complete-page/complete-page.component';
 import { WidgetModule } from '../widget/widget.module';
+import { RegisterFormComponent } from './signup/user-register/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { WidgetModule } from '../widget/widget.module';
     UserRegisterComponent,
     CodeVerifyingComponent,
     CompletePageComponent,
+    RegisterFormComponent,
   ],
   imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, WidgetModule],
 })

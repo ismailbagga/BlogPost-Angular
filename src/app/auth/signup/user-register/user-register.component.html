@@ -1,77 +1,11 @@
 <div class="container px-5">
   <h1 class="text-main text-center underline mb-5">Sign up</h1>
-  <div class="row">
+  <div class="row align-items-center">
     <div class="col d-none d-md-block">
       <img src="assets/Sign up.svg" alt="" srcset="" />
     </div>
     <div class="col">
-      <form [formGroup]="formGroup" class="need-validation" novalidate>
-        <div class="row">
-          <div class="col-6 align-items-center">
-            <app-form-field-with-icon
-              label="username"
-              type="text"
-              [control]="formGroup"
-              controllerName="username"
-            >
-            </app-form-field-with-icon>
-          </div>
-
-          <div class="col-6">
-            <app-form-field
-              controllerName="fullName"
-              type="text"
-              label="Full Name"
-              [control]="formGroup"
-            ></app-form-field>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-12">
-            <app-form-field-with-icon
-              controllerName="email"
-              label="email"
-              type="email"
-              [control]="formGroup"
-            ></app-form-field-with-icon>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col">
-            <app-form-field
-              type="password"
-              label="password"
-              [control]="formGroup"
-              controllerName="password"
-            ></app-form-field>
-          </div>
-          <div class="col">
-            <app-form-field
-              controllerName="confirmPassword"
-              label="confirm password"
-              type="password"
-              [control]="formGroup"
-            ></app-form-field>
-          </div>
-        </div>
-        <div class="row mt-5 align-items-center">
-          <div class="col-6 d-flex justify-content-center">
-            <button type="submit" class="btn btn-main b-n-o">Sign up</button>
-          </div>
-          <div class="col-6">
-            <a routerLink="/login" class="btn btn-link b-n-o"
-              >Already have account</a
-            >
-          </div>
-        </div>
-      </form>
+      <app-register-form></app-register-form>
     </div>
   </div>
 </div>
-
-<h5>Values {{ formGroup.value | json }}</h5>
-<h3>Errors {{ formGroup.controls["username"].errors | json }}</h3>
-<!-- <h3>Errors {{ formGroup.controls['pal'].errors | json }}</h3>
-<h3>Errors {{ formGroup.controls['pal'].errors | json }}</h3>
-<h3>Errors {{ formGroup.controls['pal'].errors | json }}</h3> -->
-<h3>Valid {{ formGroup.valid | json }}</h3>
