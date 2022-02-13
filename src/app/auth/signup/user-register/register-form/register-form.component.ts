@@ -13,6 +13,7 @@ import {
 })
 export class RegisterFormComponent implements OnInit {
   formGroup = new FormGroup({
+    papa: new FormControl('', Validators.required),
     username: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
@@ -42,10 +43,10 @@ export class RegisterFormComponent implements OnInit {
     let control = this.getControler(key);
     return control.invalid && control.touched && control.dirty;
   }
-  getControler(key: string): AbstractControl {
+  getControler(key: string): FormControl {
     let control = this.formGroup.get(key);
     if (!control) throw new Error('no contrller with ' + key);
-    return control;
+    return control as FormControl;
   }
   fetchError(key: string, error: string): boolean {
     return this.getControler(key).hasError(error);

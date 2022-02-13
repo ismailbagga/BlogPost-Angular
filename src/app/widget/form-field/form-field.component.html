@@ -1,9 +1,10 @@
 <label class="form-label">{{ label }}</label>
 <input
   [type]="type"
-  class="form-control"
+  class="form-control is-invalid"
   id="fullName"
-  [formControl]="formControler"
+  [formControl]="control"
 />
 <div class="valid-feedback">Looks good!</div>
+
 <ng-content></ng-content>

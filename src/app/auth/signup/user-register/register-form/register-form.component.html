@@ -1,5 +1,23 @@
 <form [formGroup]="formGroup">
   <div class="row">
+    <div class="col-12">
+      <app-form-field
+        [control]="getControler('papa')"
+        label="pap"
+        type="text"
+        fieldName="username"
+      >
+        <!-- <h1>Valid</h1> -->
+        <!-- <div
+          *ngIf="fetchError('papa', 'required')"
+          id="validationServerUsernameFeedback"
+          class="invalid-feedback"
+        >
+          Username already exist
+          <h1></h1>
+        </div> -->
+      </app-form-field>
+    </div>
     <div class="col-6 align-items-center">
       <label class="form-label" for="username">Username</label>
       <div class="input-group">
@@ -166,6 +184,8 @@
   </div>
 </form>
 <div class="container mt-3">
+  <p>papa : {{ formGroup.get("papa")?.errors | json }}</p>
+  <p>papa : {{ formGroup.get("papa")?.value | json }}</p>
   <p>Form Status : {{ formGroup.status }}</p>
   <p>username : {{ formGroup.get("username")?.errors | json }}</p>
   <p>full Name : {{ formGroup.get("fullName")?.valid | json }}</p>

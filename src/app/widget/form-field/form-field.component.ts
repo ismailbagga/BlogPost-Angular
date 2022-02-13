@@ -7,10 +7,13 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./form-field.component.css'],
 })
 export class FormFieldComponent implements OnInit {
+  @Input() valid: boolean = false;
+  @Input() unvalid: boolean = false;
   @Input() label = '';
   @Input() type = '';
   @Input() placeholder = '';
-  @Input() formControler!: FormControl;
+  @Input() control!: FormControl;
+  @Input() fieldName: string = '';
   constructor() {}
 
   ngOnInit(): void {}

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormFieldComponent } from './form-field/form-field.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [FormFieldComponent],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [],
+  exports: [FormFieldComponent],
 })
 export class WidgetModule {}
