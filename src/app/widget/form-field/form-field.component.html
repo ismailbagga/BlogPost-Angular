@@ -3,13 +3,11 @@
   [type]="type"
   class="form-control is-invalid"
   [ngClass]="{
-    'is-valid': valid && !isFocus,
-    'is-invalid': invalid && !isFocus
+    'is-valid': valid,
+    'is-invalid': invalid
   }"
   [placeholder]="placeholder"
   [formControl]="control"
-  (blur)="unFocus()"
-  (focus)="focus()"
 />
 <div class="valid-feedback">Looks good!</div>
 

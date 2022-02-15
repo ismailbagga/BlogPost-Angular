@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" (submit)="handleSubmit($event)">
   <div class="row">
     <div class="col-12"></div>
     <div class="col-6 align-items-center">
@@ -125,11 +125,20 @@
     <div class="col">
       <app-form-field
         type="password"
-        label="Password"
+        label="Confirm Password"
         [valid]="isValid('confirm')"
         [invalid]="isUnValid('confirm')"
         [control]="getControler('confirm')"
       >
+        <div
+          class="invalid-feedback"
+          *ngIf="fetchError('confirm', 'passwordDontMatch')"
+        >
+          Password Must Match
+        </div>
+        <div class="invalid-feedback" *ngIf="fetchError('confirm', 'required')">
+          Confirmation Password Required
+        </div>
       </app-form-field>
     </div>
   </div>
@@ -143,9 +152,7 @@
   </div>
 </form>
 <div class="container mt-3">
-  <p>papa : {{ formGroup.get("papa")?.errors | json }}</p>
-  <p>papa : {{ formGroup.get("papa")?.value | json }}</p>
-  <p>Form Status : {{ formGroup.status }}</p>
+  <p>Form Status : {{ formGroup.errors | json }}</p>
   <p>username : {{ formGroup.get("username")?.errors | json }}</p>
   <p>full Name : {{ formGroup.get("fullName")?.errors | json }}</p>
   <p>email : {{ formGroup.get("email")?.errors | json }}</p>

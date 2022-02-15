@@ -13,16 +13,7 @@ export class FormFieldComponent implements OnInit {
   @Input() type = '';
   @Input() placeholder = '';
   @Input() control!: FormControl;
-  isFocus: boolean = true;
   constructor() {}
 
   ngOnInit(): void {}
-  unFocus() {
-    this.isFocus = false;
-    console.log('unfocus', this.isFocus);
-  }
-  focus() {
-    this.isFocus = true;
-    console.log('focus', this.isFocus);
-  }
 }

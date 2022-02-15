@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.service';
+import { MatchPasswordService } from './match-password.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('MathPasswordService', () => {
+  let service: MatchPasswordService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AuthService);
+    service = TestBed.inject(MatchPasswordService);
   });
 
   it('should be created', () => {

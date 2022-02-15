@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +26,7 @@ export class SignupComponent implements OnInit {
     ]),
     confirm: new FormControl(''),
   });
-  constructor(private authenticatinSer: AuthService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

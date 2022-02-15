@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatchPasswordService } from 'src/app/services/validators/match-password.service';
 
 @Component({
   selector: 'app-register-form',
@@ -12,24 +13,28 @@ import {
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
-  formGroup = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    fullName: new FormControl('', [
-      Validators.maxLength(20),
-      Validators.required,
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    confirm: new FormControl(''),
-  });
-  constructor() {}
+  constructor(private matchPassword: MatchPasswordService) {}
+
+  formGroup = new FormGroup(
+    {
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      fullName: new FormControl('', [
+        Validators.maxLength(20),
+        Validators.required,
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      confirm: new FormControl('', Validators.required),
+    },
+    this.matchPassword.validate
+  );
 
   ngOnInit(): void {}
   isValid(key: string): boolean {
@@ -51,5 +56,17 @@ export class RegisterFormComponent implements OnInit {
   }
   fetchError(key: string, error: string): boolean {
     return this.getControler(key).hasError(error);
+  }
+  handleSubmit(event: Event) {
+    event.preventDefault;
+    if (this.formGroup.invalid) {
+      Object.keys(this.formGroup.controls).forEach((element) => {
+        const control = this.getControler(element);
+        control?.markAsTouched({ onlySelf: true });
+        control?.markAsDirty({ onlySelf: true });
+      });
+      return;
+    }
+    console.log(this.formGroup.value);
   }
 }
