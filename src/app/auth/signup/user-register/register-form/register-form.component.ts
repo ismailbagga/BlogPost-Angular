@@ -25,18 +25,7 @@ export class RegisterFormComponent implements OnInit {
   extracFields() {
     return FormsControlUtils.retrieveFields();
   }
-  isValid(key: string): boolean {
-    let control = this.getControler(key);
-    // console.log(control.invalid && control.touched && control.dirty);
-    // if (key === 'username') console.log('valid', control.untouched);
 
-    return control.valid && control.touched && control.dirty;
-  }
-  isUnValid(key: string): boolean {
-    let control = this.getControler(key);
-    // if (key === 'username') console.log('undvalid', control.untouched);
-    return control.invalid && control.touched && control.dirty;
-  }
   getControler(key: string): FormControl {
     let control = this.formGroup.get(key);
     if (!control) throw new Error('no contrller with ' + key);

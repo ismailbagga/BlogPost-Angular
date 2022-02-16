@@ -7,8 +7,8 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./form-field.component.css'],
 })
 export class FormFieldComponent implements OnInit {
-  @Input() valid: boolean = false;
-  @Input() invalid: boolean = false;
+  valid: boolean = false;
+  invalid: boolean = false;
   @Input() label = '';
   @Input() type = '';
   @Input() placeholder = '';
@@ -16,10 +16,16 @@ export class FormFieldComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  isValid(): boolean {
-    return false;
+  isValid() {
+    let control = this.control;
+    // console.log(control.invalid && control.touched && control.dirty);
+    // if (key === 'username') console.log('valid', control.untouched);
+
+    this.valid = control.valid && control.touched && control.dirty;
   }
-  isInValid(): boolean {
-    return false;
+  isInValid() {
+    let control = this.control;
+    // if (key === 'username') console.log('undvalid', control.untouched);
+    this.invalid = control.invalid && control.touched && control.dirty;
   }
 }

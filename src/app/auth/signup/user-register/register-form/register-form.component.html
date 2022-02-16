@@ -1,17 +1,15 @@
 <form [formGroup]="formGroup" (submit)="handleSubmit($event)">
-  <div class="row">
+  <div class="row gx-2">
     <div class="col-12"></div>
     <div
       *ngFor="let field of extracFields(); trackBy: trackByFn"
-      class="align-items-center mb-2"
+      class="align-items-center"
       [class]="field.name === 'email' ? 'col-12' : 'col-6'"
     >
       <app-form-field
         [control]="getControler(field.name)"
         [label]="field.label"
         [type]="field.type"
-        [valid]="isValid(field.name)"
-        [invalid]="isUnValid(field.name)"
       >
         <ng-container *ngFor="let error of field.errors">
           <div
@@ -23,147 +21,9 @@
           </div>
         </ng-container>
       </app-form-field>
-      <!-- <app-form-field
-        [control]="getControler('username')"
-        label="username"
-        type="text"
-        [valid]="isValid('username')"
-        [invalid]="isUnValid('username')"
-      >
-        <div
-          *ngIf="fetchError('username', 'pattern')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Username must only contain number , letter or _
-        </div>
-        <div
-          *ngIf="fetchError('username', 'required')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Username Required
-        </div>
-        <div
-          *ngIf="fetchError('username', 'minlength')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Username can not be less then 3 caracters
-        </div>
-        <div
-          *ngIf="fetchError('username', 'maxlength')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Username can not be more then 20 caracters
-        </div>
-      </app-form-field>
-    </div>
-
-    <div class="col-6">
-      <app-form-field
-        type="text"
-        label="Full Name"
-        [valid]="isValid('fullName')"
-        [invalid]="isUnValid('fullName')"
-        [control]="getControler('fullName')"
-      >
-        <div
-          *ngIf="fetchError('fullName', 'maxlength')"
-          class="invalid-feedback"
-        >
-          Full name can not be more then 20 caracters
-        </div>
-        <div
-          *ngIf="fetchError('fullName', 'required')"
-          class="invalid-feedback"
-        >
-          fullName is required
-        </div>
-      </app-form-field>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-12">
-      <app-form-field
-        type="email"
-        label="Email"
-        [valid]="isValid('email')"
-        [invalid]="isUnValid('email')"
-        [control]="getControler('email')"
-        placeholder="example@gmail.com"
-      >
-        <div
-          *ngIf="fetchError('email', 'emailUsed')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          this email already Used
-        </div>
-        <div
-          *ngIf="fetchError('email', 'required')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          email is required
-        </div>
-        <div
-          *ngIf="fetchError('email', 'email')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Enter a Valid Email
-        </div>
-      </app-form-field> -->
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <!-- <app-form-field
-        type="password"
-        label="Password"
-        [valid]="isValid('password')"
-        [invalid]="isUnValid('password')"
-        [control]="getControler('password')"
-      >
-        <div
-          *ngIf="fetchError('password', 'required')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Password Required
-        </div>
-        <div
-          *ngIf="fetchError('password', 'minlength')"
-          id="validationServerUsernameFeedback"
-          class="invalid-feedback"
-        >
-          Password CAN NOT BE LESS THEN 5 CARACTERS
-        </div></app-form-field
-      >
-    </div>
-    <div class="col">
-      <app-form-field
-        type="password"
-        label="Confirm Password"
-        [valid]="isValid('confirm')"
-        [invalid]="isUnValid('confirm')"
-        [control]="getControler('confirm')"
-      >
-        <div
-          class="invalid-feedback"
-          *ngIf="fetchError('confirm', 'passwordDontMatch')"
-        >
-          Password Must Match
-        </div>
-        <div class="invalid-feedback" *ngIf="fetchError('confirm', 'required')">
-          Confirmation Password Required
-        </div>
-      </app-form-field> -->
-    </div>
-  </div>
-  <div class="row mt-5 align-items-center">
+  <div class="row mt-3 align-items-center">
     <div class="col-6 d-flex justify-content-center">
       <button type="submit" class="btn btn-main b-n-o">Sign up</button>
     </div>
