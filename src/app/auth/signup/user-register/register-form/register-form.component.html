@@ -10,11 +10,11 @@
         [invalid]="isUnValid('username')"
       >
         <div
-          *ngIf="fetchError('username', 'required')"
+          *ngIf="fetchError('username', 'pattern')"
           id="validationServerUsernameFeedback"
           class="invalid-feedback"
         >
-          Username already exist
+          Username must only contain number , letter or _
         </div>
         <div
           *ngIf="fetchError('username', 'required')"
@@ -35,7 +35,7 @@
           id="validationServerUsernameFeedback"
           class="invalid-feedback"
         >
-          Username can not be more then 3 caracters
+          Username can not be more then 20 caracters
         </div>
       </app-form-field>
     </div>

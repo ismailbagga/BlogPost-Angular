@@ -21,6 +21,8 @@ export class RegisterFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(20),
+        Validators.pattern(/(?=^\w*$)/gi),
+        Validators.pattern(/(?=\d*[a-z_])/gi),
       ]),
       email: new FormControl('', [Validators.email, Validators.required]),
       fullName: new FormControl('', [
