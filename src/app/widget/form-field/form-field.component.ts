@@ -16,4 +16,10 @@ export class FormFieldComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  isValid(): boolean {
+    return false;
+  }
+  isInValid(): boolean {
+    return false;
+  }
 }

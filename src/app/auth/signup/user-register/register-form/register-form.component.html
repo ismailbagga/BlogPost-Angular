@@ -1,8 +1,29 @@
 <form [formGroup]="formGroup" (submit)="handleSubmit($event)">
   <div class="row">
     <div class="col-12"></div>
-    <div class="col-6 align-items-center">
+    <div
+      *ngFor="let field of extracFields(); trackBy: trackByFn"
+      class="align-items-center mb-2"
+      [class]="field.name === 'email' ? 'col-12' : 'col-6'"
+    >
       <app-form-field
+        [control]="getControler(field.name)"
+        [label]="field.label"
+        [type]="field.type"
+        [valid]="isValid(field.name)"
+        [invalid]="isUnValid(field.name)"
+      >
+        <ng-container *ngFor="let error of field.errors">
+          <div
+            *ngIf="fetchError(field.name, error.error)"
+            class="text-danger form-validation-text"
+            id="some"
+          >
+            {{ error.text }}
+          </div>
+        </ng-container>
+      </app-form-field>
+      <!-- <app-form-field
         [control]="getControler('username')"
         label="username"
         type="text"
@@ -94,12 +115,12 @@
         >
           Enter a Valid Email
         </div>
-      </app-form-field>
+      </app-form-field> -->
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
-      <app-form-field
+      <!-- <app-form-field
         type="password"
         label="Password"
         [valid]="isValid('password')"
@@ -139,7 +160,7 @@
         <div class="invalid-feedback" *ngIf="fetchError('confirm', 'required')">
           Confirmation Password Required
         </div>
-      </app-form-field>
+      </app-form-field> -->
     </div>
   </div>
   <div class="row mt-5 align-items-center">

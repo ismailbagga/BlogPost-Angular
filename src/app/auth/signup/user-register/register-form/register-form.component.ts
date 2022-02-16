@@ -22,6 +22,9 @@ export class RegisterFormComponent implements OnInit {
   );
 
   ngOnInit(): void {}
+  extracFields() {
+    return FormsControlUtils.retrieveFields();
+  }
   isValid(key: string): boolean {
     let control = this.getControler(key);
     // console.log(control.invalid && control.touched && control.dirty);
@@ -41,6 +44,9 @@ export class RegisterFormComponent implements OnInit {
   }
   fetchError(key: string, error: string): boolean {
     return this.getControler(key).hasError(error);
+  }
+  trackByFn(index: any, item: any) {
+    return index;
   }
   handleSubmit(event: Event) {
     event.preventDefault;

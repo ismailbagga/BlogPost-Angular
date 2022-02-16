@@ -30,10 +30,10 @@ export class FormsControlUtils {
       desc: new FormControl('', Validators.required),
     };
   }
-  static getValidationMessage() {
+  static retrieveFields() {
     return [
       {
-        fieldName: 'username',
+        name: 'username',
         label: 'Username',
         type: 'text',
         errors: [
@@ -49,7 +49,7 @@ export class FormsControlUtils {
         ],
       },
       {
-        fieldName: 'fullName',
+        name: 'fullName',
         label: 'Full Name',
         type: 'text',
         errors: [
@@ -62,7 +62,7 @@ export class FormsControlUtils {
         ],
       },
       {
-        fieldName: 'email',
+        name: 'email',
         label: 'Email',
         type: 'email',
         errors: [
@@ -74,7 +74,7 @@ export class FormsControlUtils {
         ],
       },
       {
-        fieldName: 'password',
+        name: 'password',
         label: 'Password',
         type: 'password',
         errors: [
@@ -86,7 +86,7 @@ export class FormsControlUtils {
         ],
       },
       {
-        fieldName: 'confirm',
+        name: 'confirm',
         label: 'Password Confirmation',
         type: 'password',
         errors: [

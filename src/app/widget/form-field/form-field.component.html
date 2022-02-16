@@ -9,6 +9,5 @@
   [placeholder]="placeholder"
   [formControl]="control"
 />
-<div class="valid-feedback">Looks good!</div>
-
-<ng-content></ng-content>
+<div *ngIf="valid" class="valid-feedback">Looks good!</div>
+<ng-content *ngIf="invalid"></ng-content>
