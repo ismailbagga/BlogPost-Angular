@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { FormsControlUtils } from 'src/app/Data/ValidatorsObject';
 import { MatchPasswordService } from 'src/app/services/validators/match-password.service';
 
 @Component({
@@ -16,25 +17,7 @@ export class RegisterFormComponent implements OnInit {
   constructor(private matchPassword: MatchPasswordService) {}
 
   formGroup = new FormGroup(
-    {
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(20),
-        Validators.pattern(/(?=^\w*$)/gi),
-        Validators.pattern(/(?=\d*[a-z_])/gi),
-      ]),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      fullName: new FormControl('', [
-        Validators.maxLength(20),
-        Validators.required,
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
-      confirm: new FormControl('', Validators.required),
-    },
+    FormsControlUtils.getSignUpControls(),
     this.matchPassword.validate
   );
 
