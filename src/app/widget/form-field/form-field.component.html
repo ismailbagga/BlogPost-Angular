@@ -3,11 +3,11 @@
   [type]="type"
   class="form-control is-invalid"
   [ngClass]="{
-    'is-valid': valid,
-    'is-invalid': invalid
+    'is-valid': isValid(),
+    'is-invalid': isInValid()
   }"
   [placeholder]="placeholder"
   [formControl]="control"
 />
-<div *ngIf="valid" class="valid-feedback">Looks good!</div>
-<ng-content *ngIf="invalid"></ng-content>
+<div *ngIf="isValid()" class="valid-feedback">Looks good!</div>
+<ng-content *ngIf="isInValid()"></ng-content>

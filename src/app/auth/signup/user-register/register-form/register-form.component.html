@@ -1,6 +1,5 @@
 <form [formGroup]="formGroup" (submit)="handleSubmit($event)">
-  <div class="row gx-2">
-    <div class="col-12"></div>
+  <div class="row">
     <div
       *ngFor="let field of extracFields(); trackBy: trackByFn"
       class="align-items-center"
@@ -15,7 +14,6 @@
           <div
             *ngIf="fetchError(field.name, error.error)"
             class="text-danger form-validation-text"
-            id="some"
           >
             {{ error.text }}
           </div>

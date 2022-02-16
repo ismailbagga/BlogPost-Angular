@@ -15,17 +15,22 @@ export class FormFieldComponent implements OnInit {
   @Input() control!: FormControl;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //   this.control.statusChanges.subscribe(() => {
+    //     this.isInValid();
+    //   });
+    // }
+  }
   isValid() {
     let control = this.control;
     // console.log(control.invalid && control.touched && control.dirty);
     // if (key === 'username') console.log('valid', control.untouched);
 
-    this.valid = control.valid && control.touched && control.dirty;
+    return control.valid && control.touched && control.dirty;
   }
   isInValid() {
     let control = this.control;
     // if (key === 'username') console.log('undvalid', control.untouched);
-    this.invalid = control.invalid && control.touched && control.dirty;
+    return control.invalid && control.touched && control.dirty;
   }
 }
