@@ -10,4 +10,10 @@
   [formControl]="control"
 />
 <div *ngIf="isValid()" class="valid-feedback">Looks good!</div>
-<ng-content *ngIf="isInValid()"></ng-content>
+<div class="errors-container" *ngIf="isInValid()">
+  <ng-container *ngFor="let error of errors">
+    <div *ngIf="fetchError(error.error)" class="text-danger error-message">
+      {{ error.text }}
+    </div>
+  </ng-container>
+</div>

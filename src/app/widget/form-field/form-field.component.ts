@@ -12,6 +12,7 @@ export class FormFieldComponent implements OnInit {
   @Input() label = '';
   @Input() type = '';
   @Input() placeholder = '';
+  @Input() errors: { error: string; text: string }[] = [];
   @Input() control!: FormControl;
   constructor() {}
 
@@ -32,5 +33,9 @@ export class FormFieldComponent implements OnInit {
     let control = this.control;
     // if (key === 'username') console.log('undvalid', control.untouched);
     return control.invalid && control.touched && control.dirty;
+  }
+
+  fetchError(error: string): boolean {
+    return this.control.hasError(error);
   }
 }

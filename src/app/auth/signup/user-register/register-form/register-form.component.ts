@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  AsyncValidator,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FormsControlUtils } from 'src/app/Data/ValidatorsObject';
-import { MatchPasswordService } from 'src/app/services/validators/match-password.service';
+import { FormsControlUtils } from 'src/app/Utils/ValidatorsUtils';
+import { AuthenticationService } from 'src/app/services/app-user/authentication.service';
+import { UniqueEmailValidatorService } from 'src/app/services/AsyncValidatorsImpl/unique-email-validator.service';
+import { UniqueUsernameValidatorService } from 'src/app/services/AsyncValidatorsImpl/unique-username-validator.service';
+import { MatchPasswordService } from 'src/app/services/ValidatorsImpl/match-password.service';
 
 @Component({
   selector: 'app-register-form',
@@ -14,39 +18,61 @@ import { MatchPasswordService } from 'src/app/services/validators/match-password
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
-  constructor(private matchPassword: MatchPasswordService) {}
-
+  errorName: string = '';
+  constructor(
+    private authService: AuthenticationService,
+    private matchPassword: MatchPasswordService,
+    private uniqueUsernameValid: UniqueUsernameValidatorService,
+    private uniqueEmailValid: UniqueEmailValidatorService
+  ) {
+    console.log(this.authService);
+  }
+  controlsObj = FormsControlUtils.getSignUpControls();
   formGroup = new FormGroup(
-    FormsControlUtils.getSignUpControls(),
+    {
+      ...this.controlsObj,
+      username: this.addAsyncValid(
+        this.controlsObj['username'],
+        this.uniqueUsernameValid
+      ),
+      email: this.addAsyncValid(
+        this.controlsObj['email'],
+        this.uniqueEmailValid
+      ),
+    },
     this.matchPassword.validate
   );
 
   ngOnInit(): void {}
+  addAsyncValid(controler: FormControl, validator: AsyncValidator) {
+    controler.addAsyncValidators(validator.validate);
+    return controler;
+  }
   extracFields() {
     return FormsControlUtils.retrieveFields();
   }
-
   getControler(key: string): FormControl {
     let control = this.formGroup.get(key);
-    if (!control) throw new Error('no contrller with ' + key);
+    if (!control) throw new Error('no controler with a name of ' + key);
     return control as FormControl;
   }
-  fetchError(key: string, error: string): boolean {
-    return this.getControler(key).hasError(error);
-  }
+
   trackByFn(index: any, item: any) {
     return index;
   }
   handleSubmit(event: Event) {
     event.preventDefault;
     if (this.formGroup.invalid) {
-      Object.keys(this.formGroup.controls).forEach((element) => {
-        const control = this.getControler(element);
-        control?.markAsTouched({ onlySelf: true });
-        control?.markAsDirty({ onlySelf: true });
-      });
+      this.toutchAllController();
       return;
     }
     console.log(this.formGroup.value);
+  }
+  toutchAllController() {
+    Object.keys(this.formGroup.controls).forEach((element) => {
+      const control = this.getControler(element);
+      control?.markAsTouched({ onlySelf: true });
+      control?.markAsDirty({ onlySelf: true });
+    });
   }
 }
