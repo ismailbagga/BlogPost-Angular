@@ -112,7 +112,7 @@ export class FormsControlUtils implements AsyncValidator {
       },
       {
         name: 'confirm',
-        label: 'Password Confirmation',
+        label: 'Confirmation',
         type: 'password',
         errors: [
           { error: 'required', text: 'Confirmation Password is  Required' },

@@ -7,10 +7,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormsControlUtils } from 'src/app/Utils/ValidatorsUtils';
-import { AuthenticationService } from 'src/app/services/app-user/authentication.service';
+import {
+  AuthenticationService,
+  SignUpRequest,
+} from 'src/app/services/app-user/authentication.service';
 import { UniqueEmailValidatorService } from 'src/app/services/AsyncValidatorsImpl/unique-email-validator.service';
 import { UniqueUsernameValidatorService } from 'src/app/services/AsyncValidatorsImpl/unique-username-validator.service';
 import { MatchPasswordService } from 'src/app/services/ValidatorsImpl/match-password.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -18,15 +22,14 @@ import { MatchPasswordService } from 'src/app/services/ValidatorsImpl/match-pass
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
-  errorName: string = '';
+  loading: boolean = false;
   constructor(
     private authService: AuthenticationService,
     private matchPassword: MatchPasswordService,
     private uniqueUsernameValid: UniqueUsernameValidatorService,
-    private uniqueEmailValid: UniqueEmailValidatorService
-  ) {
-    console.log(this.authService);
-  }
+    private uniqueEmailValid: UniqueEmailValidatorService,
+    private route: Router
+  ) {}
   controlsObj = FormsControlUtils.getSignUpControls();
   formGroup = new FormGroup(
     {
@@ -66,7 +69,16 @@ export class RegisterFormComponent implements OnInit {
       this.toutchAllController();
       return;
     }
-    console.log(this.formGroup.value);
+    const user: SignUpRequest = this.formGroup.value;
+    this.loading = true;
+    this.authService.signUp(user).subscribe({
+      next: (value) => {
+        this.route.navigate(['register', 'verify', value]);
+      },
+      error: (error) => {
+        // handle error
+      },
+    });
   }
   toutchAllController() {
     Object.keys(this.formGroup.controls).forEach((element) => {

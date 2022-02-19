@@ -1,1 +1,42 @@
-<p>code-verifying works!</p>
+<div class="card m-auto" style="width: 300px">
+  <div class="card-header text-center">Verify</div>
+  <div
+    class="card-body d-flex align-items-center justify-content-center flex-column"
+  >
+    <div class="card-title text-center w-100">
+      <div
+        class="alert alert-danger alert-dismissible fade text-center"
+        role="alert"
+        [ngClass]="{ show: error.text !== '' }"
+      >
+        {{ error.text }}
+        <button
+          type="button"
+          class="btn-close"
+          (click)="error.text = ''"
+        ></button>
+      </div>
+      <h5>Enter Code Here that got sented to your email</h5>
+    </div>
+    <div class="">
+      <app-form-field
+        placeholder="Type here"
+        [control]="formControl"
+        [errors]="[
+          { error: 'required', text: 'please Enter the code' },
+          { error: 'pattern', text: 'Code is 6 digit number' }
+        ]"
+      ></app-form-field>
+    </div>
+    <div
+      class="btn-container d-flex mw-50 justify-content-around"
+      style="width: 300px"
+    >
+      <button class="btn btn-primary" (click)="verify()">Verify</button>
+      <button class="btn btn-danger" (click)="resendCode()">Resend Code</button>
+    </div>
+  </div>
+  <div class="card-footer"></div>
+</div>
+
+<h1>{{ uuid }}</h1>

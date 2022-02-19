@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/app-user/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,26 +9,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  currNavIndex: number = 0;
-  links = [
-    { path: './', text: 'Register' },
-    { path: 'verify', text: 'Code Verification' },
-    { path: 'complete', text: 'Complete' },
-  ];
-  registerControl = new FormGroup({
-    username: new FormControl('', Validators.maxLength(20)),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    fullName: new FormControl('', [
-      Validators.maxLength(20),
-      Validators.required,
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    confirm: new FormControl(''),
-  });
-  constructor() {}
+  authService: AuthenticationService;
+  constructor(authService: AuthenticationService, private route: Router) {
+    this.authService = authService;
+  }
+  ngOnInit(): void {
+    this.authService.getLoginStateAsObservable().subscribe((state) => {
+      console.log(state);
 
-  ngOnInit(): void {}
+      if (state) {
+        this.route.navigateByUrl('');
+      }
+    });
+  }
 }

@@ -1,7 +1,8 @@
 <label class="form-label">{{ label }}</label>
 <input
   [type]="type"
-  class="form-control is-invalid"
+  class="form-control"
+  [placeholder]="placeholder"
   [ngClass]="{
     'is-valid': isValid(),
     'is-invalid': isInValid()
@@ -9,11 +10,13 @@
   [placeholder]="placeholder"
   [formControl]="control"
 />
-<div *ngIf="isValid()" class="valid-feedback">Looks good!</div>
-<div class="errors-container" *ngIf="isInValid()">
-  <ng-container *ngFor="let error of errors">
-    <div *ngIf="fetchError(error.error)" class="text-danger error-message">
-      {{ error.text }}
-    </div>
-  </ng-container>
+<div class="state-container">
+  <div *ngIf="isValid()" class="text-success state-min-height">Looks good!</div>
+  <div class="errors-container state-min-height" *ngIf="isInValid()">
+    <ng-container *ngFor="let error of errors">
+      <div *ngIf="fetchError(error.error)" class="text-danger error-message">
+        {{ error.text }}
+      </div>
+    </ng-container>
+  </div>
 </div>

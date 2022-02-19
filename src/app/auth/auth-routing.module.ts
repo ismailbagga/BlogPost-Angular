@@ -13,7 +13,7 @@ const routes: Routes = [
     component: SignupComponent,
     children: [
       { path: '', component: UserRegisterComponent },
-      { path: 'verify', component: CodeVerifyingComponent },
+      { path: 'verify/:id', component: CodeVerifyingComponent },
       { path: 'complete', component: CompletePageComponent },
     ],
   },

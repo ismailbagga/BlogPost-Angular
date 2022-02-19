@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 export class FormFieldComponent implements OnInit {
   valid: boolean = false;
   invalid: boolean = false;
+  stateChanged = false;
   @Input() label = '';
   @Input() type = '';
   @Input() placeholder = '';
@@ -27,12 +28,12 @@ export class FormFieldComponent implements OnInit {
     // console.log(control.invalid && control.touched && control.dirty);
     // if (key === 'username') console.log('valid', control.untouched);
 
-    return control.valid && control.touched && control.dirty;
+    return control.valid && control.dirty;
   }
   isInValid() {
     let control = this.control;
     // if (key === 'username') console.log('undvalid', control.untouched);
-    return control.invalid && control.touched && control.dirty;
+    return control.invalid && control.dirty;
   }
 
   fetchError(error: string): boolean {

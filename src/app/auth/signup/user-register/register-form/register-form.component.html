@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" (submit)="handleSubmit($event)">
-  <div class="row g-2">
+  <div class="row">
     <div
       *ngFor="let field of extracFields(); trackBy: trackByFn"
       class="align-items-center message"
@@ -16,7 +16,15 @@
   </div>
   <div class="row mt-3 align-items-center">
     <div class="col-6 d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary b-n-o">Sign up</button>
+      <button type="submit" class="btn btn-primary b-n-o">
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        {{ loading ? "Loading" : "Sign Up" }}
+      </button>
     </div>
     <div class="col-6">
       <a routerLink="/login" class="btn btn-link b-n-o">Already have account</a>
