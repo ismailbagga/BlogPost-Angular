@@ -9,6 +9,7 @@ import { CodeVerifyingComponent } from './signup/code-verifying/code-verifying.c
 import { CompletePageComponent } from './signup/complete-page/complete-page.component';
 import { WidgetModule } from '../widget/widget.module';
 import { RegisterFormComponent } from './signup/user-register/register-form/register-form.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { RegisterFormComponent } from './signup/user-register/register-form/regi
     CodeVerifyingComponent,
     CompletePageComponent,
     RegisterFormComponent,
+    LogoutComponent,
   ],
   imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, WidgetModule],
 })

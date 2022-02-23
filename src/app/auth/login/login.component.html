@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="container mt-5">
+  <!-- <div class="alert alert-danger ">wowwowo</div> -->
+  <form (submit)="handleSubmit($event)" [formGroup]="formGroup">
+    <div class="row w-100 mx-auto">
+      <div class="col-7 d-none d-md-block">
+        <img src="assets/login.svg" class="w-100" alt="Login" srcset="" />
+      </div>
+      <div class="col-12 col-md-4 mt-5">
+        <div
+          class="alert alert-dismissable alert-danger fade"
+          [ngClass]="{ show: errorText !== '' }"
+          role="alert"
+        >
+          {{ errorText }}
+        </div>
+        <div class="col">
+          <app-form-field
+            label="Username or email"
+            [control]="getControler('username')"
+            type="text"
+            [errors]="[{ error: 'required', text: 'username is required' }]"
+            [validateState]="false"
+          ></app-form-field>
+        </div>
+        <div class="col">
+          <app-form-field
+            label="Password"
+            [control]="getControler('password')"
+            type="password"
+            [errors]="[{ error: 'required', text: 'password is required' }]"
+            [validateState]="false"
+          ></app-form-field>
+        </div>
+        <div class="d-flex justify-content-around mt-3 align-items-center">
+          <button class="btn btn-primary">Login</button>
+          <a routerLink="/register">Create An account</a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

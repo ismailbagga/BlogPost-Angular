@@ -16,34 +16,45 @@ export class FormsControlUtils implements AsyncValidator {
   ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
     throw new Error('Method not implemented.');
   }
-  private static formControlls: { [key: string]: FormControl } = {
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(20),
-      MultipleValidators.letterMatch,
-      MultipleValidators.availablesCharMatch,
-    ]),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    fullName: new FormControl('', [
-      Validators.maxLength(20),
-      Validators.required,
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    confirm: new FormControl('', Validators.required),
-  };
-
+  private static getForms() {
+    const formControlls: { [key: string]: FormControl } = {
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+        MultipleValidators.letterMatch,
+        MultipleValidators.availablesCharMatch,
+      ]),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      fullName: new FormControl('', [
+        Validators.maxLength(20),
+        Validators.required,
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      confirm: new FormControl('', Validators.required),
+    };
+    return formControlls;
+  }
   static getSignUpControls() {
-    return this.formControlls;
+    return this.getForms();
   }
   static getChangeUserDataControls() {
     return {
-      ...this.formControlls,
+      ...this.getForms(),
       desc: new FormControl('', Validators.required),
     };
+  }
+  static loginFromControls() {
+    const forms = this.getSignUpControls();
+    return { username: forms['username'], password: forms['password'] };
+  }
+  static retrieveLoginFields() {
+    return this.retrieveFields().filter(
+      (item) => item.name === 'username' || item.name === 'password'
+    );
   }
   static retrieveFields() {
     return [

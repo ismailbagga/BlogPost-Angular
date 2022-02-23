@@ -43,7 +43,7 @@ export class RegisterFormComponent implements OnInit {
         this.uniqueEmailValid
       ),
     },
-    this.matchPassword.validate
+    { validators: [this.matchPassword.validate] }
   );
 
   ngOnInit(): void {}
@@ -70,12 +70,13 @@ export class RegisterFormComponent implements OnInit {
       return;
     }
     const user: SignUpRequest = this.formGroup.value;
-    this.loading = true;
+    this.loading = false;
     this.authService.signUp(user).subscribe({
       next: (value) => {
         this.route.navigate(['register', 'verify', value]);
       },
       error: (error) => {
+        this.loading = false;
         // handle error
       },
     });

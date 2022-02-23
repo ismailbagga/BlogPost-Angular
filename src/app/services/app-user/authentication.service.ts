@@ -6,6 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, map } from 'rxjs';
+import { loginReq } from 'src/app/auth/login/login.component';
 import { environment } from 'src/environments/environment';
 type availableReq = { available: boolean };
 export interface SignUpRequest {
@@ -26,6 +27,14 @@ export class AuthenticationService {
   signUp(user: SignUpRequest) {
     const url = `${this.backendUrl}/auth/register`;
     return this.http.post<string>(url, user);
+  }
+  login(value: loginReq) {
+    const url = `${this.backendUrl}/auth/login`;
+    return this.http.post<any>(url, value);
+  }
+  isAuthenticated() {
+    const url = `${this.backendUrl}/isAuthenticated`;
+    return this.http.get<boolean>(url);
   }
   emitLoginState(state: boolean) {
     this.isAuthenticated$.next(state);

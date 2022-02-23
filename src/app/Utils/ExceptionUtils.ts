@@ -20,4 +20,5 @@ export class ExceptionsUtils {
   public static USER_ENABLE = 'User is Enable';
   public static EMAIl_SPAM = 'user sent to many verification token';
   public static INVALID_VERIFICATION = 'This Verification Number is Wrong';
+  public static NO_USER_WITH_EMAIL_Or_Username = 'not found';
 }

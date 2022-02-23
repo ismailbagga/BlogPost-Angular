@@ -4,14 +4,16 @@
   class="form-control"
   [placeholder]="placeholder"
   [ngClass]="{
-    'is-valid': isValid(),
+    'is-valid': validateState && isValid(),
     'is-invalid': isInValid()
   }"
   [placeholder]="placeholder"
   [formControl]="control"
 />
 <div class="state-container">
-  <div *ngIf="isValid()" class="text-success state-min-height">Looks good!</div>
+  <div *ngIf="validateState && isValid()" class="text-success state-min-height">
+    Looks good!
+  </div>
   <div class="errors-container state-min-height" *ngIf="isInValid()">
     <ng-container *ngFor="let error of errors">
       <div *ngIf="fetchError(error.error)" class="text-danger error-message">

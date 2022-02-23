@@ -48,8 +48,7 @@ export class CodeVerifyingComponent implements OnInit {
             console.log('after verifying', value);
           })
         );
-
-        this.route.navigate(['']);
+        this.route.navigate(['register', 'complete']);
       },
       error: (error) => {
         const {
