@@ -9,6 +9,7 @@ import { AuthHttpInterceptorService } from './services/auth-http-interceptor.ser
 import { ErorrHandinlingModule } from './error-handling/erorr-handinling.module';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { PagesModule } from './pages/pages.module';
+import { WidgetModule } from './widget/widget.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { PagesModule } from './pages/pages.module';
     DetailsPageModule,
     ErorrHandinlingModule,
     HttpClientModule,
+    WidgetModule,
   ],
   providers: [
     {

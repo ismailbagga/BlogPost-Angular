@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
       next: (value) => {
         console.log(value);
 
-        // this.authService.emitLoginState(true);
-        // this.route.navigate(['/']);
+        this.authService.emitLoginState(true);
+        this.route.navigate(['/']);
       },
       error: (error) => {
         const {
