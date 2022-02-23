@@ -18,8 +18,8 @@ import { PagesModule } from './pages/pages.module';
     BrowserAnimationsModule,
     AuthModule,
     PagesModule,
-    ErorrHandinlingModule,
     DetailsPageModule,
+    ErorrHandinlingModule,
     HttpClientModule,
   ],
   providers: [

@@ -5,7 +5,7 @@ import { UnAuthorizeComponent } from './un-authorize/un-authorize.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'notfound', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent },
   { path: 'unauthorize', component: UnAuthorizeComponent },
 ];
 
