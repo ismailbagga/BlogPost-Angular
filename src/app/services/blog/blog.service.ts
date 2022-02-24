@@ -2,19 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 const backendUrl = `${environment.serverLink}/blogs`;
+type categories = 'AI' | 'POLITICS' | 'EDUCATION';
 export interface Blog {
   id: string;
   title: string;
   description: string;
-  categorie: string;
+  categorie: categories;
   content: string;
   visited: number;
   sharers: number;
   likes: number;
   author_fullName: string;
-  authorUsername: string;
+  author_Username: string;
   lastUpdated: Date;
 }
+export const categoriesBadges = {
+  AI: 'primary',
+  EDUCATION: 'success',
+  POLITICS: 'dark',
+  TECHNOLOGIES: 'danger',
+};
 @Injectable({
   providedIn: 'root',
 })

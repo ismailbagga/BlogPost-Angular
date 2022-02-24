@@ -16,6 +16,7 @@
           <button class="btn btn-main text-white b-n-o">Blog</button>
           <a
             routerLink="/register"
+            *ngIf="!isLogin"
             class="fw-bold ms-3 text-decoration-none text-black border-bottom border-main border-3 pb-1"
             >Create an Account</a
           >

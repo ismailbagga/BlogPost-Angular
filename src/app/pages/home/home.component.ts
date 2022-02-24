@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AuthenticationService } from 'src/app/services/app-user/authentication.service';
 import { Blog, BlogService } from 'src/app/services/blog/blog.service';
 
 @Component({
@@ -14,11 +15,17 @@ export class HomeComponent implements OnInit {
     'assets/Reviews/rev3.jpeg',
   ];
   formControl = new FormControl('');
+  isLogin = false;
   mostVisitedBlogs: Blog[] = [];
-  constructor(private blogService: BlogService) {}
+  constructor(
+    private blogService: BlogService,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
-    // ({next : ,error : })
+    this.authService.getLoginStateAsObservable().subscribe((value) => {
+      this.isLogin = value;
+    });
     this.blogService.getMostVistedBlogs(1).subscribe({
       next: (value) => {
         this.mostVisitedBlogs = value;
