@@ -5,6 +5,14 @@ $custom-theme: (
   main: #ff443e,
   projGrey: #616160,
 );
+$utilities-bg: map-merge(
+  $utilities-colors,
+  (
+    main: to-rgb(#ff443e),
+    projGrey: to-rgb(#616160),
+  )
+);
+$utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg");
 $utilities: (
   "color": (
     property: color,
@@ -15,6 +23,7 @@ $utilities: (
     values: map-merge($utilities-text-colors, $custom-theme),
   ),
 );
+
 $theme-colors: map-merge($custom-theme, $theme-colors);
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 // @include mat.core-theme($my-theme);
