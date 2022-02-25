@@ -1,0 +1,14 @@
+<div
+  class="card rounded align-items-center shadow-lg bg-body p-2"
+  style="height: 50px"
+>
+  <h6 class="text-dark">
+    <i [class]="icon + ' pe-2'"></i>{{ label }}
+    <span class="px-1">:</span>
+    <span *ngIf="linkState?.state; then thenBlock; else elseBlock"></span>
+    <ng-template #thenBlock>
+      <a [routerLink]="linkState.link" target="_blank">{{ text }}</a>
+    </ng-template>
+    <ng-template #elseBlock>{{ text }}</ng-template>
+  </h6>
+</div>

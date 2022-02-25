@@ -1,15 +1,30 @@
 <label class="form-label">{{ label }}</label>
-<input
-  [type]="type"
-  class="form-control"
-  [placeholder]="placeholder"
-  [ngClass]="{
-    'is-valid': validateState && isValid(),
-    'is-invalid': isInValid()
-  }"
-  [placeholder]="placeholder"
-  [formControl]="control"
-/>
+<ng-container
+  *ngIf="type === 'text-box'; then thenBlock; else elseBlock"
+></ng-container>
+<ng-template #thenBlock>
+  <textarea
+    [formControl]="control"
+    class="form-control fs-4"
+    rows="3"
+    [placeholder]="placeholder"
+    [ngClass]="{ 'is-invalid': isInValid() }"
+  ></textarea>
+</ng-template>
+<ng-template #elseBlock>
+  <input
+    [type]="type"
+    class="form-control"
+    [placeholder]="placeholder"
+    [ngClass]="{
+      'is-valid': validateState && isValid(),
+      'is-invalid': isInValid()
+    }"
+    [placeholder]="placeholder"
+    [formControl]="control"
+  />
+</ng-template>
+
 <div class="state-container">
   <div *ngIf="validateState && isValid()" class="text-success state-min-height">
     Looks good!

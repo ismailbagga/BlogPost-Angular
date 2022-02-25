@@ -1,1 +1,19 @@
-<p>blog-detail works!</p>
+<div class="container d-flex align-items-center mt-5">
+  <div class="row row-cols-auto gy-2">
+    <app-blog-data-icon
+      class="pe-2"
+      *ngFor="let icon of icons"
+      [iconObj]="icon"
+    ></app-blog-data-icon>
+  </div>
+</div>
+
+<div
+  class="container d-flex flex-column align-items-center rounded bg-body shadow-lg mt-5"
+>
+  <h1 class="text-main py-3">{{ blog?.title }}</h1>
+  <h5 class="text-secondry" style="max-width: 500px">
+    {{ blog?.description }}
+  </h5>
+  <div class="container" [innerHTML]="blog?.content"></div>
+</div>

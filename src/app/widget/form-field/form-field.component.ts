@@ -16,9 +16,11 @@ export class FormFieldComponent implements OnInit {
   @Input() errors: { error: string; text: string }[] = [];
   @Input() control!: FormControl;
   @Input() validateState = true;
+
   constructor() {}
 
   ngOnInit(): void {}
+
   isValid() {
     let control = this.control;
     return control.valid && control.dirty;

@@ -5,12 +5,13 @@ import { UnAuthorizeComponent } from './un-authorize/un-authorize.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: 'error/unauthorize', component: UnAuthorizeComponent },
   { path: '**', component: NotFoundComponent },
-  { path: 'unauthorize', component: UnAuthorizeComponent },
 ];
 
 @NgModule({
   declarations: [NotFoundComponent, UnAuthorizeComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
+  exports: [NotFoundComponent],
 })
 export class ErorrHandinlingModule {}

@@ -1,18 +1,93 @@
-<h1>TinyMCE 5 Angular Demo</h1>
 <div class="container">
-  <editor
-    [init]="{
-      height: 300,
-      menubar: false,
-      plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table paste code help wordcount'
-      ],
-      toolbar:
-        'undo redo | formatselect | bold italic backcolor | \
+  <form [formGroup]="addBlogForms">
+    <h1 class="text-center">Start Bloging</h1>
+    <div class="container mt-5">
+      <div class="row mb-3">
+        <div class="col">
+          <app-form-field
+            [control]="getControler('title')"
+            placeholder="Title"
+            [errors]="[
+              { error: 'required', text: 'title is required' },
+              {
+                error: 'maxlength',
+                text: 'title cant not be more then 50 carecter'
+              }
+            ]"
+          ></app-form-field>
+        </div>
+        <div class="col-12 col-md-6 mt-2 mt-md-0">
+          <app-form-field
+            type="text-box"
+            placeholder="Description"
+            [control]="getControler('description')"
+            [validateState]="false"
+            [errors]="[
+              { error: 'required', text: 'Description is required' },
+              {
+                error: 'maxlength',
+                text: 'description cant not be more then 100 carecter'
+              }
+            ]"
+          ></app-form-field>
+        </div>
+        <div class="col-12 mt-3">
+          <h5 class="text-center">Select Categorie</h5>
+          <div class="row mt-4">
+            <div
+              class="col d-flex mx-auto justify-content-between"
+              style="max-width: 500px"
+            >
+              <app-categorie-radio-button
+                *ngFor="let item of categories | keyvalue"
+                [categorie]="item.key"
+                [control]="getControler('category')"
+                [color]="item.value"
+                [name]="'category'"
+              ></app-categorie-radio-button>
+            </div>
+          </div>
+          value : {{ getControler("category").value }}
+        </div>
+      </div>
+      <editor
+        formControlName="content"
+        [init]="{
+          height: 300,
+          menubar: false,
+
+          plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic backcolor | \
        alignleft aligncenter alignright alignjustify | \
        bullist numlist outdent indent | removeformat | help'
-    }"
-  ></editor>
+        }"
+      ></editor>
+    </div>
+
+    <app-large-alert
+      [show]="state.state != 0"
+      [color]="colorizeAlert()"
+      [content]="state.content"
+      (close)="hideAlert()"
+    >
+      <a
+        *ngIf="state.state == 1"
+        [routerLink]="'/blog/' + title"
+        class="text-success"
+        >Visit the blog</a
+      >
+    </app-large-alert>
+    <div
+      class="d-flex mx-auto mt-3 justify-content-between"
+      style="max-width: 200px"
+    >
+      <button class="btn btn-primary" (click)="savePost($event)">Save</button>
+      <app-model></app-model>
+    </div>
+  </form>
 </div>

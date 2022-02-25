@@ -18,8 +18,6 @@ export class NavbarComponent implements OnInit {
     private authService: AuthenticationService
   ) {
     authService.getLoginStateAsObservable().subscribe((val) => {
-      console.log('From Login');
-
       this.isLogin = val;
     });
   }
@@ -28,11 +26,8 @@ export class NavbarComponent implements OnInit {
     this.route.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.url = val.url;
-        console.log(this.url);
       }
     });
   }
-  handleSearch() {
-    console.log(this.formControl.value);
-  }
+  handleSearch() {}
 }

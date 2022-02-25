@@ -14,8 +14,6 @@ export class AppComponent implements OnInit {
   }
   check() {
     this.authService.isAuthenticated().subscribe((value: boolean) => {
-      console.log('is Am Authenticated ?', value);
-
       this.authService.emitLoginState(value);
     });
   }

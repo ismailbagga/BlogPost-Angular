@@ -1,0 +1,22 @@
+<div
+  [class]="'alert fade mx-auto alert-dismissible mt-3 alert-' + color"
+  [ngClass]="{ show: show }"
+  style="max-width: 400px"
+  role="alert"
+>
+  <h4 class="alert-heading">{{ content.header }}</h4>
+  <p>
+    {{ content.body }}
+  </p>
+  <hr />
+  <p class="mb-0">
+    {{ content.footer }}
+  </p>
+  <ng-content></ng-content>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="onDismiss()"
+  ></button>
+</div>

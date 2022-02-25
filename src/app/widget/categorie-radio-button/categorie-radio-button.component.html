@@ -1,0 +1,12 @@
+<input
+  type="radio"
+  class="btn-check"
+  [id]="categorie"
+  [name]="name"
+  [value]="categorie"
+  autocomplete="off"
+  (click)="onChange($event)"
+/>
+<label [class]="'btn btn-outline-' + color" [for]="categorie">{{
+  categorie | titlecase
+}}</label>
