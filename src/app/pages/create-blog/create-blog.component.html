@@ -50,23 +50,20 @@
           value : {{ getControler("category").value }}
         </div>
       </div>
-      <editor
-        formControlName="content"
-        [init]="{
-          height: 300,
-          menubar: false,
-
-          plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
-          ],
-          toolbar:
-            'undo redo | formatselect | bold italic backcolor | \
-       alignleft aligncenter alignright alignjustify | \
-       bullist numlist outdent indent | removeformat | help'
-        }"
-      ></editor>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <h1 class="border border-5 border-main text-center">Write Blog</h1>
+        <textarea
+          class="form-control fs-5"
+          style="height: 600px"
+          formControlName="content"
+        ></textarea>
+      </div>
+      <div class="col-md-6 col-12">
+        <h1 class="border border-5 border-main text-center">Result</h1>
+        <markdown [data]="getControler('content').value"></markdown>
+      </div>
     </div>
 
     <app-large-alert

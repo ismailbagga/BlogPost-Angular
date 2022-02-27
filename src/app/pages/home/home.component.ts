@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getLoginStateAsObservable().subscribe((value) => {
-      this.isLogin = value;
+      this.isLogin = value === null ? false : value;
     });
     this.blogService.getMostVistedBlogs(1).subscribe({
       next: (value) => {

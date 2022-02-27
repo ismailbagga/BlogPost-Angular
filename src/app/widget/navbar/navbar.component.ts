@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private authService: AuthenticationService
   ) {
     authService.getLoginStateAsObservable().subscribe((val) => {
-      this.isLogin = val;
+      this.isLogin = val === null ? false : val;
     });
   }
 

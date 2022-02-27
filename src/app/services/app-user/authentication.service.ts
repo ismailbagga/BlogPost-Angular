@@ -3,9 +3,9 @@ import {
   HttpParams,
   JsonpClientBackend,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, tap } from 'rxjs';
 import { loginReq } from 'src/app/auth/login/login.component';
 import { environment } from 'src/environments/environment';
 type availableReq = { available: boolean };
@@ -19,11 +19,23 @@ export interface SignUpRequest {
   providedIn: 'root',
 })
 export class AuthenticationService {
-  isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  isAuthenticated$: BehaviorSubject<boolean | null> = new BehaviorSubject<
+    boolean | null
+  >(false);
   backendUrl = `${environment.serverLink}/users`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.emitLoginState(null);
+    this.isAuthenticated()
+      .pipe(
+        tap((value) => {
+          console.log('Lets GOOOO');
+
+          this.emitLoginState(value);
+        })
+      )
+      .subscribe();
+  }
+
   signUp(user: SignUpRequest) {
     const url = `${this.backendUrl}/auth/register`;
     return this.http.post<string>(url, user);
@@ -36,7 +48,7 @@ export class AuthenticationService {
     const url = `${this.backendUrl}/isAuthenticated`;
     return this.http.get<boolean>(url);
   }
-  emitLoginState(state: boolean) {
+  emitLoginState(state: boolean | null) {
     this.isAuthenticated$.next(state);
   }
   getLoginStateAsObservable() {

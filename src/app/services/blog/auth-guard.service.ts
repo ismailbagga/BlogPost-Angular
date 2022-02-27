@@ -9,7 +9,7 @@ import {
   UrlSegment,
   UrlTree,
 } from '@angular/router';
-import { Observable, skipWhile, take, tap } from 'rxjs';
+import { map, Observable, skipWhile, take, tap } from 'rxjs';
 import { AuthenticationService } from '../app-user/authentication.service';
 
 @Injectable({
@@ -28,16 +28,17 @@ export class AuthGuardService implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
+    // const obs =  this.authService.getLoginStateAsObservable();
+
     return this.authService.getLoginStateAsObservable().pipe(
       skipWhile((value) => value === null),
       take(1),
       tap((state) => {
-        console.log('guard', state);
-
         if (!state) {
           this.router.navigateByUrl('error/unauthorize');
         }
-      })
+      }),
+      map((value) => value || false)
     );
   }
 }
