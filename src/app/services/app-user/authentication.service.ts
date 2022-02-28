@@ -8,9 +8,20 @@ import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { loginReq } from 'src/app/auth/login/login.component';
 import { environment } from 'src/environments/environment';
+import { Blog } from '../blog/blog.service';
 type availableReq = { available: boolean };
 export type VerifieReq = { verifie: boolean; username: string };
 type AuthenticatioState = { username?: string; isAuthenticated: boolean };
+export class User {
+  id: string = '';
+  username: string = '';
+  fullName: string = '';
+  email: string = '';
+  description: string = '';
+  blogsShared: Blog[] = [];
+  blogsLiked: Blog[] = [];
+  blogsCreated: Blog[] = [];
+}
 export interface SignUpRequest {
   username: string;
   email: string;
@@ -39,7 +50,11 @@ export class AuthenticationService {
       )
       .subscribe();
   }
-
+  getAppUser(username: string) {
+    const url = `${this.backendUrl}/user`;
+    const params = new HttpParams().set('u', username);
+    return this.http.get<User>(url, { params: params });
+  }
   signUp(user: SignUpRequest) {
     const url = `${this.backendUrl}/auth/register`;
     return this.http.post<string>(url, user);
