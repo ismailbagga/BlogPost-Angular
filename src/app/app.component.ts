@@ -8,13 +8,6 @@ import { AuthenticationService } from './services/app-user/authentication.servic
 })
 export class AppComponent implements OnInit {
   title = 'BlogPost';
-  constructor(private authService: AuthenticationService) {}
-  ngOnInit(): void {
-    this.check();
-  }
-  check() {
-    this.authService.isAuthenticated().subscribe((value: boolean) => {
-      this.authService.emitLoginState(value);
-    });
-  }
+  constructor() {}
+  ngOnInit(): void {}
 }

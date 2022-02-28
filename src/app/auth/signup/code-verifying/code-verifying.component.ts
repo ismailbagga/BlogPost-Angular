@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/app-user/authentication.service';
+import {
+  AuthenticationService,
+  VerifieReq,
+} from 'src/app/services/app-user/authentication.service';
 import { ExceptionsUtils } from 'src/app/Utils/ExceptionUtils';
 
 @Component({
@@ -41,13 +44,10 @@ export class CodeVerifyingComponent implements OnInit {
     }
     const { value } = this.formControl;
     this.authService.verify(this.uuid, value).subscribe({
-      next: (res) => {
+      next: (res: VerifieReq) => {
         this.authService.emitLoginState(true);
-        console.log(
-          this.authService.getLoginStateAsObservable().subscribe((value) => {
-            console.log('after verifying', value);
-          })
-        );
+        this.authService.emitUsername(res.username);
+
         this.route.navigate(['register', 'complete']);
       },
       error: (error) => {

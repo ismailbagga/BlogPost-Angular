@@ -9,6 +9,8 @@ import { BehaviorSubject, map, tap } from 'rxjs';
 import { loginReq } from 'src/app/auth/login/login.component';
 import { environment } from 'src/environments/environment';
 type availableReq = { available: boolean };
+export type VerifieReq = { verifie: boolean; username: string };
+type AuthenticatioState = { username?: string; isAuthenticated: boolean };
 export interface SignUpRequest {
   username: string;
   email: string;
@@ -22,15 +24,17 @@ export class AuthenticationService {
   isAuthenticated$: BehaviorSubject<boolean | null> = new BehaviorSubject<
     boolean | null
   >(false);
+  username$ = new BehaviorSubject<string>('');
   backendUrl = `${environment.serverLink}/users`;
   constructor(private http: HttpClient) {
     this.emitLoginState(null);
     this.isAuthenticated()
       .pipe(
         tap((value) => {
-          console.log('Lets GOOOO');
+          console.log('check authentication', value);
 
-          this.emitLoginState(value);
+          this.emitLoginState(value.isAuthenticated);
+          this.emitUsername(value.username || '');
         })
       )
       .subscribe();
@@ -46,10 +50,13 @@ export class AuthenticationService {
   }
   isAuthenticated() {
     const url = `${this.backendUrl}/isAuthenticated`;
-    return this.http.get<boolean>(url);
+    return this.http.get<AuthenticatioState>(url);
   }
   emitLoginState(state: boolean | null) {
     this.isAuthenticated$.next(state);
+  }
+  emitUsername(username: string) {
+    this.username$.next(username);
   }
   getLoginStateAsObservable() {
     return this.isAuthenticated$.asObservable();
@@ -67,7 +74,7 @@ export class AuthenticationService {
   verify(id: string, code: string) {
     const url = `${this.backendUrl}/verify`;
     const load = { uuid: id, code: code.toString() };
-    return this.http.put(url, load);
+    return this.http.put<VerifieReq>(url, load);
   }
   ResendVerificationCode(uuid: string) {
     const url = `${this.backendUrl}/Resend`;

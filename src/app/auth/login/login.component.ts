@@ -55,9 +55,13 @@ export class LoginComponent implements OnInit {
     const loginreq: loginReq = this.formGroup.value;
     this.authService.login(loginreq).subscribe({
       next: (value) => {
-        console.log(value);
-
+        console.log('login respnse', value);
         this.authService.emitLoginState(true);
+        this.authService.emitUsername(value.username);
+        this.authService.username$
+          .asObservable()
+          .subscribe((value) => console.log(value));
+
         this.route.navigate(['/']);
       },
       error: (error) => {

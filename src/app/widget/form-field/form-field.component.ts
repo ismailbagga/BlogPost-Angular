@@ -16,6 +16,7 @@ export class FormFieldComponent implements OnInit {
   @Input() errors: { error: string; text: string }[] = [];
   @Input() control!: FormControl;
   @Input() validateState = true;
+  @Input() disable = false;
 
   constructor() {}
 

@@ -2,31 +2,145 @@
   <div class="row row-cols-auto gy-2">
     <app-blog-data-icon
       class="pe-2"
-      *ngFor="let icon of icons"
-      [iconObj]="icon"
+      [link]="'/' + blog.author_Username"
+      [iconObj]="icons[0]"
+      [value]="blog.author_fullName"
+    ></app-blog-data-icon
+    ><app-blog-data-icon
+      class="pe-2"
+      [iconObj]="icons[1]"
+      [value]="blog.visited"
+    ></app-blog-data-icon
+    ><app-blog-data-icon
+      class="pe-2"
+      [iconObj]="icons[2]"
+      [value]="blog.shares"
+    ></app-blog-data-icon
+    ><app-blog-data-icon
+      class="pe-2"
+      [iconObj]="icons[3]"
+      [value]="blog.likes"
     ></app-blog-data-icon>
   </div>
 </div>
-
-<div class="container bg-body shadow-lg text-center mt-2 py-3">
-  <h3 class="">Title : {{ blog?.title }}<br /></h3>
-  <h5 class="text-secondry">description : {{ blog?.description }}</h5>
+<div class="container my-4" *ngIf="isPostedByMe">
+  <button class="btn btn-danger" (click)="deleteBlog()">Delete Blog</button>
+  <button class="btn ms-3 btn-success" (click)="enableEditMode()">
+    Modify Blog
+  </button>
+  <button class="btn ms-3 btn-primary" *ngIf="editMode" (click)="updateBlog()">
+    Save</button
+  ><button
+    class="btn ms-3 btn-warning"
+    *ngIf="editMode"
+    (click)="cancelEditMode()"
+  >
+    Cancel
+  </button>
+</div>
+<div class="container bd-example bg-body shadow-lg mt-2 py-3">
+  <div class="mb-3">
+    <app-form-field
+      [control]="getControler('title')"
+      placeholder="Title"
+      [disable]="!editMode"
+      [errors]="[
+        { error: 'required', text: 'title is required' },
+        {
+          error: 'maxlength',
+          text: 'title cant not be more then 50 carecter'
+        }
+      ]"
+    ></app-form-field>
+  </div>
+  <div class="mb-3">
+    <app-form-field
+      type="text-box"
+      placeholder="Description"
+      [control]="getControler('description')"
+      [validateState]="false"
+      [disable]="!editMode"
+      [errors]="[
+        { error: 'required', text: 'Description is required' },
+        {
+          error: 'maxlength',
+          text: 'description cant not be more then 100 carecter'
+        }
+      ]"
+    ></app-form-field>
+  </div>
+  <div class="mb-3">
+    <div class="col-12 mt-3">
+      <h5 class="">Categorie</h5>
+      <div class="row mt-4">
+        <div
+          class="col d-flex justify-content-between"
+          style="max-width: 500px"
+        >
+          <app-categorie-radio-button
+            *ngFor="let item of categories | keyvalue"
+            [categorie]="item.key"
+            [control]="getControler('category')"
+            [color]="item.value"
+            [name]="'category'"
+            [disable]="!editMode"
+          ></app-categorie-radio-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="container mt-5">
-  <h1
-    class="text-center mx-auto fw-bolder text-main border-bottom border-main border-5 pb-2"
-    style="max-width: 100px"
-  >
-    Blog
-  </h1>
-  <div class="card shadow-lg text-white p-3 bg-secondary">
-    <markdown [data]="blog?.content"></markdown>
+  <div class="row">
+    <div class="col-md-6 col-12" [class]="editMode ? 'd-block' : 'd-none'">
+      <h1 class="border border-5 border-main text-center">Write Blog</h1>
+      <textarea
+        class="form-control fs-5"
+        style="height: 600px"
+        [formControl]="getControler('content')"
+      ></textarea>
+    </div>
+    <div [ngClass]="editMode ? 'col-12 col-md-6' : 'col-12'">
+      <h1
+        class="text-center mx-auto fw-bolder text-main border-bottom border-main border-5 pb-2"
+        style="max-width: 100px"
+      >
+        Blog
+      </h1>
+      <div class="card shadow-lg text-white p-3 bg-secondary">
+        <markdown [data]="getControler('content').value"></markdown>
+      </div>
+    </div>
   </div>
+  <app-large-alert
+    [show]="state.state != 0"
+    [color]="'danger  '"
+    [content]="state.content"
+    (close)="hideAlert()"
+  >
+  </app-large-alert>
   <div
     class="container mt-3 d-flex justify-content-around fs-2"
     style="max-width: 200px"
+    *ngIf="isLogin"
   >
-    <i class="bi bi-hand-thumbs-up"></i>
-    <i class="bi bi-share"></i>
+    <i
+      class="bi bi-hand-thumbs-up-fill pe-auto"
+      [class]="blog.interaction.isLikedByUser ? 'text-main' : 'text-primary'"
+      style="cursor: pointer"
+      data-bs-toggle="toolip"
+      data-bs-placement="bottom"
+      title="Like"
+      (click)="onlikeIconClick()"
+    ></i>
+    <i
+      class="bi bi-share-fill pe-auto"
+      [class]="blog.interaction.isSharedByUser ? 'text-main' : 'text-primary'"
+      style="cursor: pointer"
+      data-bs-toggle="toolip"
+      data-bs-placement="bottom"
+      title="Share"
+      (click)="onShareIconClick()"
+    ></i>
   </div>
 </div>

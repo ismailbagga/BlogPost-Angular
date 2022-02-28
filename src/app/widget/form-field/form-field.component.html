@@ -5,8 +5,9 @@
 <ng-template #thenBlock>
   <textarea
     [formControl]="control"
-    class="form-control fs-4"
-    rows="3"
+    class="form-control"
+    [readOnly]="disable"
+    rows="2"
     [placeholder]="placeholder"
     [ngClass]="{ 'is-invalid': isInValid() }"
   ></textarea>
@@ -16,8 +17,9 @@
     [type]="type"
     class="form-control"
     [placeholder]="placeholder"
+    [readOnly]="disable"
     [ngClass]="{
-      'is-valid': validateState && isValid(),
+      'is-valid': !disable && validateState && isValid(),
       'is-invalid': isInValid()
     }"
     [placeholder]="placeholder"
@@ -25,7 +27,7 @@
   />
 </ng-template>
 
-<div class="state-container">
+<div class="state-container" *ngIf="!disable">
   <div *ngIf="validateState && isValid()" class="text-success state-min-height">
     Looks good!
   </div>

@@ -11,10 +11,12 @@ export class CategorieRadioButtonComponent implements OnInit {
   @Input() name = '';
   @Input() color = '';
   @Input() control = new FormControl();
+  @Input() disable = false;
   constructor() {}
 
   ngOnInit(): void {}
   onChange(event: Event) {
+    if (this.disable) return;
     this.control.setValue(this.categorie);
   }
 }

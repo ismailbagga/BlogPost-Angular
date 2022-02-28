@@ -8,19 +8,15 @@ import { Icon } from 'src/app/details-page/blog-detail/blog-detail.component';
 })
 export class BlogDataIconComponent implements OnInit {
   @Input() iconObj!: Icon;
+  @Input() value: string | number | boolean = '';
+  @Input() link = '';
   label = '';
   icon = '';
-  text = '';
-  linkState = { state: false, link: '' };
 
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.iconObj);
-
     this.label = this.iconObj?.label;
     this.icon = this.iconObj?.icon;
-    this.text = this.iconObj?.text;
-    this.linkState = this.iconObj?.linkState;
   }
 }

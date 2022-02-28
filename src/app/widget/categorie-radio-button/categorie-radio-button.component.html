@@ -5,6 +5,8 @@
   [name]="name"
   [value]="categorie"
   autocomplete="off"
+  [disabled]="disable"
+  [checked]="control.value === categorie"
   (click)="onChange($event)"
 />
 <label [class]="'btn btn-outline-' + color" [for]="categorie">{{

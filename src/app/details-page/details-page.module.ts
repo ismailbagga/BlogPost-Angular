@@ -4,7 +4,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { WidgetModule } from '../widget/widget.module';
 
 const routes: Routes = [
@@ -19,6 +19,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     WidgetModule,
     MarkdownModule.forChild(),
+    ReactiveFormsModule,
   ],
 })
 export class DetailsPageModule {}
